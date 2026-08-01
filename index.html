@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPAP填写规范 V1.0</title>
+    <style>
+        /* ── 全局重置 ── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f7fb;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+            color: #1e293b;
+            line-height: 1.7;
+            padding: 0;
+        }
+
+        /* ── 固定侧边导航 ── */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 220px;
+            height: 100vh;
+            background: #0b2b4a;
+            color: #e2e8f0;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 2px 0 12px rgba(0, 0, 0, 0.12);
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0 30px 0;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-brand {
+            padding: 0 16px 18px 16px;
+            border-bottom: 1px solid #1e405e;
+            margin-bottom: 12px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-brand h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        .sidebar-brand .sub {
+            font-size: 12px;
+            color: #8ba3bc;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        .sidebar-brand .ver {
+            font-size: 11px;
+            color: #6a8fa8;
+            margin-top: 2px;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: 0 8px 8px 8px;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 6px 14px;
+            color: #b6ccdf;
+            text-decoration: none;
+            font-size: 13px;
+            border-radius: 6px;
+            transition: all 0.15s ease;
+            margin-bottom: 2px;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-nav a:hover {
+            background: #1a405e;
+            color: #ffffff;
+            border-left-color: #6ea8d9;
+        }
+
+        .sidebar-nav a.active {
+            background: #1f4a6b;
+            color: #ffffff;
+            border-left-color: #6ea8d9;
+            font-weight: 600;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar::-webkit-scrollbar-track {
+            background: #0b2b4a;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #3b6a8a;
+            border-radius: 4px;
+        }
+
+        /* ── 主容器 ── */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 50px 50px 280px;
+            background: #ffffff;
+            min-height: 100vh;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.04);
+        }
+
+        /* ── 顶部标题 ── */
+        .page-header {
+            text-align: center;
+            padding-bottom: 28px;
+            border-bottom: 3px solid #e8edf4;
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0b2b4a;
+            letter-spacing: 4px;
+        }
+
+        .page-header .sub {
+            color: #64748b;
+            font-size: 15px;
+            margin-top: 8px;
+            letter-spacing: 1px;
+        }
+
+        .page-header .version-tag {
+            display: inline-block;
+            background: #0b2b4a;
+            color: #fff;
+            font-size: 13px;
+            padding: 2px 16px;
+            border-radius: 20px;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* ── 内嵌目录 ── */
+        .toc {
+            background: #f8fafc;
+            border-radius: 14px;
+            padding: 24px 32px;
+            margin-bottom: 44px;
+            border: 1px solid #e9edf2;
+        }
+
+        .toc-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #0b2b4a;
+            margin-bottom: 14px;
+            letter-spacing: 2px;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 4px 20px;
+        }
+
+        .toc-grid a {
+            display: block;
+            color: #1e4a76;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 3px 0;
+            border-bottom: 1px dashed transparent;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .toc-grid a:hover {
+            color: #0b2b4a;
+            border-bottom-color: #b3c9dd;
+        }
+
+        .toc-grid .toc-num {
+            display: inline-block;
+            width: 28px;
+            color: #7a8a9e;
+            font-weight: 500;
+        }
+
+        /* ── 章节 ── */
+        .section {
+            margin-bottom: 48px;
+            scroll-margin-top: 80px;
+        }
+
+        .section h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0b2b4a;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dce4ec;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .section h2 .sec-num {
+            color: #5b7b9c;
+            font-weight: 400;
+            font-size: 18px;
+        }
+
+        .section h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a3a5c;
+            margin: 22px 0 12px 0;
+        }
+
+        .section h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1e4a76;
+            margin: 18px 0 10px 0;
+        }
+
+        .section p {
+            margin-bottom: 12px;
+            color: #1e293b;
+        }
+
+        .section .note {
+            background: #f1f6fa;
+            border-left: 4px solid #3b7ca5;
+            padding: 14px 20px;
+            border-radius: 6px;
+            margin: 16px 0;
+            font-size: 14px;
+            color: #1e3a5a;
+        }
+
+        .section .example {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 12px 18px;
+            margin: 10px 0 16px 0;
+            font-size: 14px;
+            border: 1px solid #e4e9f0;
+            color: #1e3a5a;
+        }
+
+        .section .example strong {
+            color: #0b2b4a;
+        }
+
+        .section ul,
+        .section ol {
+            padding-left: 26px;
+            margin-bottom: 16px;
+        }
+
+        .section ul li,
+        .section ol li {
+            margin-bottom: 6px;
+        }
+
+        .section ul ul,
+        .section ol ul {
+            padding-left: 24px;
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+
+        .section .item-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section .item-list li {
+            padding: 6px 0 6px 32px;
+            position: relative;
+            border-bottom: 1px solid #f0f2f5;
+        }
+
+        .section .item-list li::before {
+            content: attr(data-num);
+            position: absolute;
+            left: 0;
+            top: 6px;
+            color: #3b7ca5;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .section .item-list li .label {
+            font-weight: 600;
+            color: #0b2b4a;
+        }
+
+        /* ── 表格 ── */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 18px 0 24px 0;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .table-wrap table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            min-width: 600px;
+        }
+
+        .table-wrap table thead {
+            background: #eef3f8;
+        }
+
+        .table-wrap table th {
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: #0b2b4a;
+            border-bottom: 2px solid #d0d9e3;
+            white-space: nowrap;
+        }
+
+        .table-wrap table td {
+            padding: 10px 16px;
+            border-bottom: 1px solid #e8ecf2;
+            vertical-align: top;
+        }
+
+        .table-wrap table tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .table-wrap table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table-wrap .symbol-table td:first-child {
+            font-weight: 600;
+            color: #0b2b4a;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #dce4ec;
+            color: #1e3a5c;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 0 10px;
+            border-radius: 12px;
+            line-height: 22px;
+            margin-right: 4px;
+        }
+
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 14px 20px;
+            border-radius: 8px;
+            font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin: 12px 0 16px 0;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 28px 0;
+        }
+
+        .inline-code {
+            background: #edf2f7;
+            padding: 0 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 13px;
+            color: #1e3a5c;
+        }
+
+        /* ── 图片占位框 ── */
+        .image-placeholder {
+            background: #f1f5f9;
+            border: 2px dashed #94a3b8;
+            border-radius: 12px;
+            padding: 30px 20px;
+            margin: 20px 0;
+            text-align: center;
+            color: #1e3a5c;
+            font-size: 15px;
+        }
+
+        .image-placeholder .icon {
+            font-size: 36px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .image-placeholder .desc {
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .image-placeholder .note {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        /* ── 移动端 ── */
+        @media (max-width: 820px) {
+            .sidebar {
+                transform: translateX(-100%);
+                width: 240px;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .container {
+                padding: 24px 18px;
+                margin-left: 0;
+            }
+
+            .page-header h1 {
+                font-size: 24px;
+            }
+
+            .toc-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .menu-toggle {
+                display: flex !important;
+            }
+
+            .toc {
+                padding: 16px 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section h2 {
+                font-size: 20px;
+                flex-wrap: wrap;
+            }
+
+            .table-wrap table {
+                font-size: 13px;
+                min-width: 480px;
+            }
+
+            .table-wrap table th,
+            .table-wrap table td {
+                padding: 8px 10px;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            left: 12px;
+            top: 12px;
+            z-index: 1100;
+            background: #0b2b4a;
+            color: white;
+            border: none;
+            font-size: 26px;
+            padding: 6px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            line-height: 1;
+        }
+
+        .menu-toggle:hover {
+            background: #1a405e;
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        @media (max-width: 820px) {
+            .menu-toggle {
+                display: block;
+            }
+            .sidebar-overlay.active {
+                display: block;
+            }
+        }
+
+        @media print {
+            .sidebar {
+                display: none;
+            }
+            .menu-toggle {
+                display: none;
+            }
+            .sidebar-overlay {
+                display: none !important;
+            }
+            .container {
+                padding: 20px 30px;
+                margin: 0 auto;
+                box-shadow: none;
+            }
+            .toc {
+                break-inside: avoid;
+            }
+            .section {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+            .table-wrap {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== 移动端菜单按钮 ====== -->
+    <button class="menu-toggle" id="menuToggle" aria-label="切换导航">☰</button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ====== 固定侧边导航栏 ====== -->
+    <nav class="sidebar" id="sidebarNav">
+        <div class="sidebar-brand">
+            <h2>📋 PPAP</h2>
+            <div class="sub">填写规范 · 索引</div>
+            <div class="ver">V1.0</div>
+        </div>
+        <div class="sidebar-nav">
+            <a href="#sec-pref" class="active">● 前言</a>
+            <a href="#sec-1">一、PSW</a>
+            <a href="#sec-2">二、设计记录</a>
+            <a href="#sec-3">三、工程变更</a>
+            <a href="#sec-4">四、特殊要求</a>
+            <a href="#sec-5">五、工程批准</a>
+            <a href="#sec-6">六、DFMEA</a>
+            <a href="#sec-7">七、流程图</a>
+            <a href="#sec-8">八、PFMEA</a>
+            <a href="#sec-9">九、控制计划</a>
+            <a href="#sec-10">十、检具清单</a>
+            <a href="#sec-11">十一、MSA</a>
+            <a href="#sec-12">十二、全尺寸</a>
+            <a href="#sec-13">十三、过程能力</a>
+            <a href="#sec-14">十四、实验室资格</a>
+            <a href="#sec-15">十五、供应商测试</a>
+            <a href="#sec-16">十六、样品</a>
+            <a href="#sec-17">十七、标准限样</a>
+            <a href="#sec-18">十八、材质证明</a>
+            <a href="#sec-19">十九、按节拍生产</a>
+            <a href="#sec-20">二十、包装流程</a>
+            <a href="#sec-21">二十一、早期遏制</a>
+            <a href="#sec-22">二十二、IMDS</a>
+            <a href="#sec-23">二十三、分供方</a>
+        </div>
+    </nav>
+
+    <!-- ====== 主容器 ====== -->
+    <div class="container" id="mainContent">
+
+        <!-- ====== HEADER ====== -->
+        <div class="page-header">
+            <h1>📋 PPAP 填写规范</h1>
+            <div class="sub">依据 CVG 查核清单 &amp; AIAG《PPAP手册》第四版</div>
+            <span class="version-tag">V1.0</span>
+        </div>
+
+        <!-- ====== 内嵌目录 ====== -->
+        <div class="toc" id="toc">
+            <div class="toc-title">📑 目录大纲</div>
+            <div class="toc-grid">
+                <a href="#sec-pref"><span class="toc-num">●</span> 前言</a>
+                <a href="#sec-1"><span class="toc-num">一</span> PSW</a>
+                <a href="#sec-2"><span class="toc-num">二</span> 销售产品的设计记录</a>
+                <a href="#sec-3"><span class="toc-num">三</span> 批准的工程变更文件</a>
+                <a href="#sec-4"><span class="toc-num">四</span> 特殊要求清单</a>
+                <a href="#sec-5"><span class="toc-num">五</span> 客户工程部批准</a>
+                <a href="#sec-6"><span class="toc-num">六</span> 设计 FMEA（DFMEA）</a>
+                <a href="#sec-7"><span class="toc-num">七</span> 过程流程图</a>
+                <a href="#sec-8"><span class="toc-num">八</span> 过程 FMEA（PFMEA）</a>
+                <a href="#sec-9"><span class="toc-num">九</span> 控制计划</a>
+                <a href="#sec-10"><span class="toc-num">十</span> 检具清单及校验报告</a>
+                <a href="#sec-11"><span class="toc-num">十一</span> 测量系统研究</a>
+                <a href="#sec-12"><span class="toc-num">十二</span> 全尺寸报告</a>
+                <a href="#sec-13"><span class="toc-num">十三</span> 初始过程能力研究</a>
+                <a href="#sec-14"><span class="toc-num">十四</span> 实验室资格证书</a>
+                <a href="#sec-15"><span class="toc-num">十五</span> 供应商测试报告</a>
+                <a href="#sec-16"><span class="toc-num">十六</span> 样品</a>
+                <a href="#sec-17"><span class="toc-num">十七</span> 标准限样</a>
+                <a href="#sec-18"><span class="toc-num">十八</span> 材质证明</a>
+                <a href="#sec-19"><span class="toc-num">十九</span> 按节拍生产报告</a>
+                <a href="#sec-20"><span class="toc-num">二十</span> 包装流程</a>
+                <a href="#sec-21"><span class="toc-num">二十一</span> 早期遏制行动计划</a>
+                <a href="#sec-22"><span class="toc-num">二十二</span> IMDS 信息提交</a>
+                <a href="#sec-23"><span class="toc-num">二十三</span> 分供方清单</a>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 前言 -->
+        <div class="section" id="sec-pref">
+            <h2><span class="sec-num">●</span> 前言</h2>
+            <p>以下 PPAP 的填写规范是以 CVG 提供的查核清单来展开的。若客户未提供查核清单，一般根据 AIAG（汽车工业行动集团）的《PPAP手册》第四版，提供标准要求的 <strong>18个核心报告</strong>。具体如下：</p>
+            <ol>
+                <li><strong>设计记录</strong> — 包括产品的图纸、数模（CAD）、技术规范等。</li>
+                <li><strong>授权工程变更文件</strong> — 针对产品/过程有变更时，所有已获批准的工程变更通知。</li>
+                <li><strong>顾客工程批准</strong>（如要求）— 当客户有要求时，需提交样品批准或临时偏离许可的证明。</li>
+                <li><strong>设计失效模式与后果分析（DFMEA）</strong> — 仅当供应商有产品设计责任时，必须提供。</li>
+                <li><strong>过程流程图</strong> — 展示从原料进厂到成品出货的全部生产过程的流程。</li>
+                <li><strong>过程失效模式与后果分析（PFMEA）</strong> — 分析制造、装配过程中潜在的风险及改善措施。</li>
+                <li><strong>控制计划</strong> — 对应流程图和 PFMEA，详细列出各工序的控制方法、频次、反应计划。</li>
+                <li><strong>测量系统分析（MSA）</strong> — 通常包含量具的重复性、再现性（Gage R&amp;R）、偏倚、线性等研究报告。</li>
+                <li><strong>全尺寸测量结果</strong> — 按图纸标注的所有尺寸，对规定的样品数量进行测量，并记录实测值。</li>
+                <li><strong>材料/性能试验结果</strong> — 包含化学成分、物理性能、功能/耐久性测试等，需要有实验数据并满足规范。</li>
+                <li><strong>初始过程能力研究</strong> — 通常对关键特性进行短期的过程能力分析，如计算 Pp / Ppk 指数。</li>
+                <li><strong>合格实验室文件</strong> — 如果试验由外部或内部实验室完成，需提供该实验室经认可（如 ISO/IEC 17025）的范围证明。</li>
+                <li><strong>外观批准报告（AAR，如适用）</strong> — 如果客户要求对颜色、纹理、光泽等外观项目进行批准，则必须提交。</li>
+                <li><strong>生产件样品</strong> — 按客户要求数量，从量产工装和工艺条件下生产出的实际样品。</li>
+                <li><strong>标准样品</strong> — 由供需双方共同封样签字的样板，作为后续判定外观/界限的标准。</li>
+                <li><strong>检查辅具</strong> — 指为该项目专门制作或更新的检具、量具、夹具、样板等辅助检查工具清单及验证记录。</li>
+                <li><strong>顾客的特殊要求</strong> — 各主机厂（如 Ford, GM, Stellantis 等）在手册之外规定的独特要求文件。</li>
+                <li><strong>零件提交保证书（PSW）</strong> — 这是所有等级 <strong>都必须提交</strong> 的核心文件。完成前 17 项后，填写的正式"通关文牒"，经负责人签字承诺产品完全符合客户要求。</li>
+            </ol>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 一、PSW -->
+        <div class="section" id="sec-1">
+            <h2><span class="sec-num">一</span> PSW</h2>
+            <div class="image-placeholder">
+                <span class="icon">🖼️</span>
+                <div class="desc">PSW 零件提交保证书 填写表格示意图</div>
+                <div class="note">（原文档图：media/image1.jpeg）</div>
+            </div>
+            <ol class="item-list">
+                <li data-num="1"><span class="label">零件名称：</span>填写零件的名称。示例：SBR 传感器</li>
+                <li data-num="2"><span class="label">零件号：</span>填写客户提供的零件号。示例：320939</li>
+                <li data-num="3"><span class="label">一般勾选：</span>Yes</li>
+                <li data-num="4"><span class="label">图纸版本：</span>PPAP 提交当天的图纸版本。示例：A0</li>
+                <li data-num="5"><span class="label">提交日期：</span>PPAP 提交当天的日期。示例：2026.05.04</li>
+                <li data-num="6"><span class="label">工程更改：</span>列出所有已在该零件上体现的并已批准的工程更改，主要写变更编号，一般不填写。示例："/"</li>
+                <li data-num="7"><span class="label">提交日期（重复）：</span>PPAP 提交当天的日期</li>
+                <li data-num="8"><span class="label">图纸编号：</span>填写图纸的编号。示例：S0194-A</li>
+                <li data-num="9"><span class="label">产品重量：</span>产品实际称量出来的重量（单位：kg）。示例：0.02</li>
+                <li data-num="10"><span class="label">测量设备编号：</span>对应"检具清单及校验报告"上的间距编号。示例：LJ-003</li>
+                <li data-num="11"><span class="label">检具版本：</span>如若该检具发生过设变，则需填写版本编号，一般不填写。示例：N/A</li>
+                <li data-num="12"><span class="label">提交日期（第三次）：</span>PPAP 提交当天的日期</li>
+                <li data-num="13"><span class="label">供应商全称及代码：</span>填写本司全称及客户提供的供应商代码。示例：广东方舟智造科技有限公司 / 65066</li>
+                <li data-num="14"><span class="label">提交等级：</span>一般提交等级三，需要全部勾选上</li>
+                <li data-num="15"><span class="label">详细地址：</span>填写本司详细地址。示例：广东省肇庆市怀集县广佛肇工业区 A 区三胜五金有限公司工业园 4 栋</li>
+                <li data-num="16"><span class="label">城市·省份·邮编：</span>示例：肇庆 广东 526400</li>
+                <li data-num="17"><span class="label">客户公司名称：</span>示例：CVG</li>
+                <li data-num="18"><span class="label">客户采购员：</span>示例：王小二</li>
+                <li data-num="19"><span class="label">适用车型：</span>一般填写"通用"</li>
+                <li data-num="20"><span class="label">物质合规：</span>查看零件是否含有需要报告的物质，如不符合 ROHS 的物质，以及塑胶件是否有相应的 ISO 编码，一般填 Yes</li>
+                <li data-num="21"><span class="label">提交原因：</span>一般为首次提交，勾选"首次提交"</li>
+                <li data-num="22"><span class="label">提交等级：</span>等级 3</li>
+                <li data-num="23"><span class="label">提交结果：</span>等级 3，一般全部勾选</li>
+                <li data-num="24"><span class="label">符合性确认：</span>确认提交结果是否满足图纸和规范要求，一般勾选 YES</li>
+                <li data-num="25"><span class="label">多穴模/生产线编号：</span>如采用多穴模、成型模、工具、冲模或样板模型，或采用生产线/工作站单元生产，则必须填写特定编号</li>
+                <li data-num="26"><span class="label">样品声明：</span>无需解释或说明，一般填写 "/"</li>
+                <li data-num="27"><span class="label">代表印刷姓名：</span>本司代表印刷姓名（示例：见原图 media/image2.jpeg）</li>
+                <li data-num="28"><span class="label">职务：</span>示例：工程</li>
+                <li data-num="29"><span class="label">电话：</span>填写本司代表电话号码</li>
+                <li data-num="30"><span class="label">传真：</span>一般不填。示例："/"</li>
+                <li data-num="31"><span class="label">代表印刷姓名（重复）：</span>本司代表印刷姓名（示例：见原图 media/image2.jpeg）</li>
+                <li data-num="32"><span class="label">提交日期（第四次）：</span>PPAP 提交当天的日期</li>
+                <li data-num="33"><span class="label">客户填写区域：</span>由客户填写，即使不需要填也不能留空，填写 "/" 上去</li>
+            </ol>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 二 -->
+        <div class="section" id="sec-2">
+            <h2><span class="sec-num">二</span> 销售产品的设计记录</h2>
+            <h3>a. 气泡图</h3>
+            <p>使用圆圈数字在原图纸上标注样品尺寸及性能要求，所标注的尺寸和性能要求必须要在全尺寸报告上一一对应。如图纸上尺寸的气泡号为 ①，则全尺寸报告上该序号也必须为 ①。性能要求虽无尺寸数据，但也需填写上去，在"供应商测试"里面有对应的报告并于全尺寸报告上填写该性能测试报告的所在文件位置，如"详情见 14. 供应商报告里 14.4 触发复位压力测试"。</p>
+            <h3>b. 技术要求评审表</h3>
+            <p>根据图纸及规范要求填写对应的评审要求。</p>
+            <h3>c. 设计记录</h3>
+            <p>提供 PDF 格式的最新工程图纸。</p>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 三 -->
+        <div class="section" id="sec-3">
+            <h2><span class="sec-num">三</span> 批准的工程变更文件</h2>
+            <p>如果样品图纸为本司设计，变更图纸后需要提供客户批准承认后套框回签的图纸。如图纸为首次提交，则需提交客户批准承认后套框回签的初始版本图纸。若非设计方，则不需要提供。</p>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 四 -->
+        <div class="section" id="sec-4">
+            <h2><span class="sec-num">四</span> 特殊要求清单</h2>
+            <p>根据客户需求以及图纸要求总结出特殊要求清单，如性能要求、阻燃性、禁用物质等，并标注该要求的来源。</p>
+            <div class="example"><strong>示例：</strong>图纸标注了"禁用物质满足 GB/T 30512-2014 标准要求"为重要特性，特殊要求清单上则需要把它填写上去。</div>
+            <h3>填写规范：</h3>
+            <ol>
+                <li><strong>零件名称：</strong>填写零件的名称。示例：SBR 传感器</li>
+                <li><strong>零件号：</strong>填写客户提供的零件号。示例：320939</li>
+                <li><strong>供应商名称：</strong>填写本司的全称</li>
+                <li><strong>图纸版本：</strong>填写产品的图纸版本。示例：A0</li>
+                <li><strong>适用车型：</strong>填写零件适用的车型，一般填写"通用"</li>
+                <li><strong>特殊要求摘要：</strong>填写客户在图纸或聊天信息等提及的特殊要求。示例：阻燃性满足 GB 8410</li>
+                <li><strong>评审：</strong>"可"——同意；"否"——不同意；"仪"——需讨论/再议</li>
+                <li><strong>控制方法：</strong>填写应对特殊要求采取的措施。示例：进行耐弯折测试</li>
+                <li><strong>控制文件：</strong>填写与控制方法对应的文件。示例：耐弯折测试</li>
+                <li><strong>执行部门：</strong>明确唯一责任部门，若多部门协作，写明主导部门即可</li>
+                <li><strong>验证：</strong>确认控制方法是否可以验证通过。勾选"否"则需要在备注填写原因和下一步动作</li>
+                <li><strong>验证日期：</strong>填写实际完成并验证通过的日期。示例：2026.07.31</li>
+                <li><strong>备注：</strong>填写需要补充的内容</li>
+                <li><strong>签字区域：</strong>填写对应人员的印刷字体名字及签字日期</li>
+            </ol>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 五 -->
+        <div class="section" id="sec-5">
+            <h2><span class="sec-num">五</span> 客户工程部批准</h2>
+            <h3>a. 工程部批准材料</h3>
+            <p>供应商如需更换工艺等，则需向客户工程提交申请批准后才可迭代产品。除此之外，还需提交《变更评审检查清单》，内部进行变更可行性评估。</p>
+            <h4>顾客工程批准表格填写规范：</h4>
+            <ol>
+                <li><strong>供应商：</strong>填写本司全称</li>
+                <li><strong>供应商代码：</strong>填写客户提供的供应商代码</li>
+                <li><strong>地址：</strong>填写本司的详细地址</li>
+                <li><strong>影响控制项目：</strong>该变更是否会影响到客户指定的特殊特性（如 CC、SC）、过程控制计划或 PFMEA 中的潜在失效模式。若勾选"是"，则需重新提交控制计划和 PFMEA，甚至有可能重新提交 PPAP；若勾选"否"，则不需要。</li>
+                <li><strong>更改的说明：</strong>根据实际情况勾选更改了的方面</li>
+                <li><strong>更改的效果：</strong>必须简述变更对产品的物理性能、耐久性、外观或装配的影响。示例：预期提高抗拉强度，或减轻总重 0.2kg</li>
+                <li><strong>互换性：</strong>如果勾选了"否"，意味着新旧零件 100% 可以互换；如果勾选了"是"，客户可能会要求提供新旧件对比试验。如果影响互换性，必须附上新旧件实物对比或试验数据报告</li>
+                <li><strong>批准后更改所需时间：</strong>预估变更批准后，多久能重新提交新样品</li>
+                <li><strong>工装和设备的更改：</strong>如果勾选了"是"，必须在下方"如果是，费用多少"填写具体的预估金额，不能留空</li>
+                <li><strong>费用：</strong>若更改了工装和设备，则需填写具体费用；没更改则不需填写</li>
+                <li><strong>影响发货计划：</strong>如果影响（断供风险），必须附加说明并提前与客户 SQA 协商</li>
+                <li><strong>供方代表签字：</strong>填写本司代表的印刷体签名。必要时必须由公司具有法人授权或经营授权的管理人员签字，不能只是工程师代签</li>
+                <li><strong>影响单件的费用：</strong>如影响单件的费用，则需让业务与客户 SQA 协商，并列出变更的材料或工装设备等</li>
+                <li><strong>单件费用金额：</strong>若影响单件的费用，则需填写具体费用；不影响则不需填写</li>
+                <li><strong>后续部分：</strong>由客户填写</li>
+            </ol>
+            <h3>b. 工程部测试报告</h3>
+            <p>提供材料测试报告、性能测试报告以及全尺寸报告。如若在供应商测试报告中有提供，则不需重复提供。</p>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 六、DFMEA -->
+        <div class="section" id="sec-6">
+            <h2><span class="sec-num">六</span> 设计 FMEA（DFMEA）</h2>
+            <p>如果图纸为本司设计的，则需要提供设计 FMEA 给客户。</p>
+            <div class="note">
+                <strong>填写原则：</strong><br>
+                • 必须由多方论证小组（设计、制造、质量、试验等）共同完成，不可一人包办。<br>
+                • 所有特殊特性（SC/CC）必须在 DFMEA 中明确标识。<br>
+                • 最终版本的 DFMEA 应与设计图纸、DVP&amp;R（设计验证计划与报告）相互一致。<br>
+                • 填写前先确认：分析对象是子系统、组件还是零件？边界条件是什么？<br>
+                • 如果严重度 ≥ 9，要在 PFMEA 中有体现，有相应的措施。
+            </div>
+            <h3>填写要求：</h3>
+            <ol>
+                <li><strong>过程功能要求：</strong>分析并填写样品需要达到的功能要求。示例：高低温环境性能稳定</li>
+                <li><strong>失效模式：</strong>功能丧失或不合格的具体表现形式。示例：高温或低温后感应参数漂移</li>
+                <li><strong>潜在失效后果：</strong>失效模式对客户、法规、下游工序造成的影响。示例：极端天气下传感器工作不稳定，时灵时不灵</li>
+                <li><strong>特性等级：</strong>根据客户要求，如 "SC"、"CC"、"●/▲" 等</li>
+                <li><strong>严重度（S）：</strong>根据失效后果的严重程度，按 1-10 评分，10 = 最严重</li>
+                <li><strong>潜在失效起因/机理：</strong>导致失效模式发生的设计薄弱环节或错误。示例：材料热膨胀系数不匹配</li>
+                <li><strong>频度（O）：</strong>评分 1-10，10 = 极高概率，几乎肯定发生</li>
+                <li><strong>现行设计预防控制：</strong>在设计定型前，用于防止失效原因发生或降低其发生概率的措施。示例：选用低温度系数材料（PET/PI）碳膜配方经高低温验证</li>
+                <li><strong>现行设计探测控制：</strong>用于在设计交付前，发现失效模式或原因是否存在的方法。示例：高低温循环测试（-40℃↔85℃，100 次）循环后测试电阻变化率</li>
+                <li><strong>探测度（D）：</strong>评分 1-10，10 = 完全无法探测，1 = 肯定能探测</li>
+                <li><strong>风险顺序数 RPN：</strong>RPN = S × O × D。示例：S=4，O=3，D=3，RPN = 36。制定阀值（如 RPN &gt; 100 或 S ≥ 9 无论 RPN 值），超出必须建议措施</li>
+                <li><strong>建议的措施：</strong>针对高 RPN/AP 或 S ≥ 9 的项目制定。措施指向：降低严重度、降低频度、提升探测度。必须是具体行动</li>
+                <li><strong>责任部门及责任人：</strong>填写对应的责任部门和责任人</li>
+                <li><strong>措施的结果：</strong>填写从建议的措施中采取的措施。实施后重新评估 S、O、D，记录新的 RPN。若新值未降至可接受水平，需继续定义进一步措施，直至风险受控</li>
+            </ol>
+
+            <h4>严重度（S）评分参考：</h4>
+            <div class="image-placeholder">
+                <span class="icon">📊</span>
+                <div class="desc">严重度（S）评分参考表</div>
+                <div class="note">（原文档图：media/image3.png · 内容已在下表展示）</div>
+            </div>
+            <div class="table-wrap"><table><thead><tr><th>评分</th><th>严重度等级</th><th>后果描述</th></tr></thead><tbody><tr><td>10</td><td>极高</td><td>影响安全或法规，无警告</td></tr><tr><td>9</td><td>极高</td><td>影响安全或法规，有警告</td></tr><tr><td>8</td><td>高</td><td>产品无法运行，主要功能丧失</td></tr><tr><td>7</td><td>高</td><td>产品可运行但性能下降</td></tr><tr><td>6</td><td>中</td><td>部分功能丧失，客户不满意</td></tr><tr><td>5</td><td>中</td><td>功能退化，客户发现</td></tr><tr><td>4</td><td>低</td><td>轻微影响，大多数客户能察觉</td></tr><tr><td>3</td><td>低</td><td>轻微影响，部分客户能察觉</td></tr><tr><td>2</td><td>极低</td><td>几乎无影响</td></tr><tr><td>1</td><td>无</td><td>无影响</td></tr></tbody></table></div>
+
+            <h4>频度（O）评分参考：</h4>
+            <div class="image-placeholder">
+                <span class="icon">📊</span>
+                <div class="desc">频度（O）评分参考表</div>
+                <div class="note">（原文档图：media/image4.png · 内容已在下表展示）</div>
+            </div>
+            <div class="table-wrap"><table><thead><tr><th>评分</th><th>失效发生概率</th><th>描述</th></tr></thead><tbody><tr><td>10</td><td>≥ 1/2</td><td>极高，几乎肯定发生</td></tr><tr><td>9</td><td>1/3</td><td>很高，频繁发生</td></tr><tr><td>8</td><td>1/8</td><td>高，经常发生</td></tr><tr><td>7</td><td>1/20</td><td>中等偏高</td></tr><tr><td>6</td><td>1/80</td><td>中等</td></tr><tr><td>5</td><td>1/400</td><td>中等偏低</td></tr><tr><td>4</td><td>1/2000</td><td>低</td></tr><tr><td>3</td><td>1/15000</td><td>很低</td></tr><tr><td>2</td><td>1/150000</td><td>极低</td></tr><tr><td>1</td><td>≤ 1/1500000</td><td>几乎不可能</td></tr></tbody></table></div>
+
+            <h4>探测度（D）评分参考：</h4>
+            <div class="image-placeholder">
+                <span class="icon">📊</span>
+                <div class="desc">探测度（D）评分参考表</div>
+                <div class="note">（原文档图：media/image5.png · 内容已在下表展示）</div>
+            </div>
+            <div class="table-wrap"><table><thead><tr><th>评分</th><th>探测机会</th><th>描述</th></tr></thead><tbody><tr><td>10</td><td>极低</td><td>无法探测或没有检测</td></tr><tr><td>9</td><td>极低</td><td>很难探测，需破坏性试验</td></tr><tr><td>8</td><td>低</td><td>通过后期试验间接探测</td></tr><tr><td>7</td><td>低</td><td>通过后期试验直接探测</td></tr><tr><td>6</td><td>中等</td><td>通过过程控制探测</td></tr><tr><td>5</td><td>中等</td><td>通过在线检测探测</td></tr><tr><td>4</td><td>高</td><td>通过自动化检测探测</td></tr><tr><td>3</td><td>高</td><td>通过防错装置探测</td></tr><tr><td>2</td><td>极高</td><td>设计成熟，几乎不失效</td></tr><tr><td>1</td><td>极高</td><td>肯定能探测</td></tr></tbody></table></div>
+
+            <div class="note"><strong>常见错误：</strong><br>• 失效原因写成了制造过程错误（DFMEA 应只关注设计不足）。<br>• 探测控制写"100% 全检"（设计阶段通常没有量产全检，应写设计验证试验）。<br>• 严重度评分随意（团队必须统一对安全/法规/主要功能的定义）。<br>• 缺少特殊特性标识（一旦图纸标了关键特性，DFMEA 中对应失效的该列必须有相应符号）。<br>• 与 DV/PV 计划脱节（DFMEA 中的探测控制，应直接映射到 DVP&amp;R 中的具体试验项目）。<br>• 措施不追踪关闭（建议措施栏不能长期悬空，PPAP 前必须全部完成并更新评分）。</div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 七 -->
+        <div class="section" id="sec-7">
+            <h2><span class="sec-num">七</span> 过程流程图</h2>
+            <p>过程流程里所有的工序，都必须在 PFMEA 中作为独立的"过程步骤"进行失效分析。每个工序都有对应规定的符号，不能搞混。"关键产品特性"和"关键过程性能"要与控制计划里的产品特性和过程特性一一对应。</p>
+            <h3>核心符号标志：</h3>
+            <div class="table-wrap"><table class="symbol-table"><thead><tr><th>环节类型</th><th>标准符号</th><th>说明</th></tr></thead><tbody><tr><td>加工 / 操作</td><td>○（圆形）</td><td>增值的生产、装配、加工步骤，部分企业改用矩形方便填写工序描述</td></tr><tr><td>检验</td><td>◇（菱形）</td><td>尺寸、外观、性能等质量检查环节</td></tr><tr><td>搬运 / 运输</td><td>→（箭头）</td><td>物料在工序、车间之间的位置移动</td></tr><tr><td>储存</td><td>▽（倒三角）</td><td>正式库存、仓储管控环节</td></tr><tr><td>延迟 / 等待</td><td>D（大写）</td><td>非计划的临时停滞、待加工</td></tr></tbody></table></div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 八 -->
+        <div class="section" id="sec-8">
+            <h2><span class="sec-num">八</span> 过程 FMEA（PFMEA）</h2>
+            <ul><li>PFMEA 来自于 DFMEA 及过程流程图，DFMEA 中严重度 ≥ 9 的及过程流程图涉及到的工序都需要在 PFMEA 上有所体现。</li><li>PFMEA 分析的步骤编号与名称必须与过程流程图一致。</li><li>填写格式与 DFMEA 类似，但思路要从对设计的潜在失效模式分析转换成对生产过程的潜在失效模式分析。但有两点不同：</li></ul>
+            <h3>1. 潜在失效起因/机理：</h3><p>导致失效模式发生的根本原因，来自过程设计或控制缺陷。从 <strong>5M1E</strong> 角度找原因：</p><ul><li><strong>人（Man）：</strong>操作不当、误判（需深究为何会不当，缺少防错？）</li><li><strong>机（Machine）：</strong>设备精度不足、刀具磨损、感应器失效</li><li><strong>料（Material）：</strong>来料批次差异、半成品变形</li><li><strong>法（Method）：</strong>参数设定错误、缺少标准作业、工艺路径不合理</li><li><strong>测（Measurement）：</strong>量具未校准、测量方法错误</li><li><strong>环（Environment）：</strong>温湿度、振动、清洁度</li></ul>
+            <h3>2. 现行过程控制：</h3><p>当前已实施的、用于防止失效原因发生的措施。常见类型：</p><ul><li>防错装置（如销孔定向、传感器在位检测）</li><li>工装定期预防性维护、刀模寿命管理系统</li><li>作业指导书中的标准参数设定、首件确认流程</li><li>来料标签防错、二维码校验</li><li>培训与资格认证（仅可作为辅助，不能作为主要预防）</li></ul>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 九 -->
+        <div class="section" id="sec-9">
+            <h2><span class="sec-num">九</span> 控制计划</h2>
+            <ul><li>PFMEA 分析的步骤编号与名称必须与过程流程图一致。</li></ul>
+            <ol><li><strong>零件过程编号：</strong>直接填写过程流程图的步骤编号</li><li><strong>过程名称操作描述：</strong>直接填写过程流程图的名称</li><li><strong>生产设备：</strong>用于执行本步骤的生产设备</li><li><strong>特性：</strong>"产品特性"和"过程特性"要与过程流程图的一致</li><li><strong>特殊特性分类：</strong>根据客户图纸或 PFMEA 分析结果，对相关特性标注符号。常见符号：CC、SC、●、▲ 等。必须与图纸和 PFMEA 使用的符号完全一致</li><li><strong>产品/过程、规范/公差：</strong>特性的接收标准，即判定产品合格与否的界限</li><li><strong>测量工具：</strong>使用什么工具或方法来测量该特性。示例：目视</li><li><strong>样品容量：</strong>需要检验的样品数量</li><li><strong>抽检频率：</strong>多久检一次</li><li><strong>管理方法：</strong>如何控制该特性，确保其稳定受控。这是 PFMEA 中"预防/探测控制"的操作化落地</li><li><strong>反应计划：</strong>当控制方法发现不合格或过程异常时，立即采取的行动</li></ol>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 十 -->
+        <div class="section" id="sec-10">
+            <h2><span class="sec-num">十</span> 检具清单及校验报告</h2>
+            <p>检具清单及校验报告应该体现所有工序中包含到的所有量检具及校验结果。</p>
+            <ol><li><strong>量检具编号：</strong>填写量检具的编号。示例：LJ-001</li><li><strong>量检具名称：</strong>填写量检具的名称。示例：二次元影像仪</li><li><strong>检测项目：</strong>填写需要检测的项目名称。示例：开关导通电阻</li><li><strong>里程：</strong>填写量检具截至目前所使用的次数，整数即可。示例：6000</li><li><strong>精度/分辨率：</strong>填写量检具能检测到的最小单位。示例：0.001mm</li><li><strong>检定单位：</strong>填写检定量检具的单位或机构。示例：计量检定机构</li><li><strong>使用/存放地点：</strong>填写量检具使用或存放的地点。示例：品质部</li><li><strong>数量：</strong>填写同一类型的量检具的数量。示例：3</li><li><strong>预期总寿命：</strong>填写评估量检具的使用寿命。示例：10 年</li><li><strong>已使用年限：</strong>填写量检具已使用的年限。示例：3 年</li><li><strong>检定周期：</strong>填写量检具检定的频率。示例：1 年</li><li><strong>专用/通用：</strong>该量检具是否为只应用于该项目，是则填写"专用"，否则填写"通用"</li><li><strong>校验时间：</strong>填写量检具的校验时间。示例：2026.05.14</li><li><strong>校验结果：</strong>填写量检具的校验结果。示例：OK</li><li><strong>备注：</strong>可填写量检具的用途。示例：水胶工序专用</li></ol>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 十一 -->
+        <div class="section" id="sec-11">
+            <h2><span class="sec-num">十一</span> 测量系统研究</h2>
+            <h3>主表格填写规范：</h3><ol><li><strong>零件/工序号：</strong>填写零件或工序的名称。示例：水胶工序</li><li><strong>测量内容：</strong>填写测量零件的内容。示例：开关导通电阻</li><li><strong>测量要求：</strong>填写测量内容的规范要求。示例：≤150Ω</li><li><strong>量具名称：</strong>填写测量量具所使用的设备名称。示例：二次元影像仪</li><li><strong>测量范围：</strong>填写量具的量程大小。示例：0~200Ω</li><li><strong>分辨率：</strong>填写量具的精度大小。示例：0.001mm</li><li><strong>测量器具编号：</strong>填写量具的编号。示例：EQ-001</li><li><strong>分析项目：</strong>填写分析测量出来的数据的项目类别。示例：GR&amp;R 分析</li><li><strong>完成时间：</strong>填写完成分析数据的时间。示例：2026.6.1</li><li><strong>分析人：</strong>填写分析人员姓名。示例：王小二</li><li><strong>分析结果：</strong>"OK" 或 "NG"</li><li><strong>报告附件：</strong>一般不填</li></ol>
+            <h3>重复性再现性研究（交叉型）表格填写规范：</h3><ol><li><strong>零件名称：</strong>填写产品的零件名称</li><li><strong>零件号：</strong>填写产品的零件号</li><li><strong>特性名称：</strong>填写测量的项目</li><li><strong>分析日期：</strong>填写分析数据的日期</li><li><strong>特性值：</strong>填写测量项目的标准值</li><li><strong>上限：</strong>填写标准值 + 上公差的值</li><li><strong>下限：</strong>填写标准值 - 下公差的值</li><li><strong>分析：</strong>填写分析数据的人员姓名</li><li><strong>量具名称：</strong>填写测量产品的量具名称</li><li><strong>量具编号：</strong>填写测量产品的量具编号</li><li><strong>量具精度：</strong>填写量具的精密程度</li><li><strong>批准：</strong>填写批准数据分析报告的人员姓名</li><li><strong>零件：</strong>每个操作员测量对同一件产品进行 3 次，共需测量 10 pcs 的产品</li><li><strong>平均值：</strong>对同一件产品测量 3 次的平均值（公式计算）</li><li><strong>极差：</strong>3 次测量出来的最大值减去最小值（公式计算）</li><li><strong>结果平均值：</strong>对应行 10 pcs 产品测量值的平均值（公式计算）</li><li><strong>零件（Xp）：</strong>零件测量值的期望值，3 名操作员对同一件产品测量的平均值的和除以 3</li><li><strong>图表报告：</strong>使用 Minitab 分析 3 名操作员测量产品出来的数据所得。量具 R&amp;R 报告里的 "% 研究变异（%SV）" 列对应的 "合计量具 R&amp;R" 行的值即为 "%R&amp;R" 的值；"可区分的类别数" 即为 "NDC"。%G&amp;G &lt; 10%，NDC &gt; 5 是测量系统可接受的</li><li><strong>分析者判定及分析结论：</strong>根据分析出来的图表报告以及评判标准，填写分析判定和结论</li></ol>
+            <h3>Minitab 进行 GR&amp;R（交叉）分析操作步骤：</h3>
+            <div class="image-placeholder">
+                <span class="icon">📈</span>
+                <div class="desc">Minitab 数据格式示例（操作员A测量数据）</div>
+                <div class="note">（原文档图：media/image6.png）</div>
+            </div>
+            <div class="image-placeholder">
+                <span class="icon">📈</span>
+                <div class="desc">Minitab 量具 R&amp;R 研究（交叉）设置界面</div>
+                <div class="note">（原文档图：media/image7.png）</div>
+            </div>
+            <ol><li>选择 10 件同一型号的零件，分别让 3 名操作员测量同一件零件 3 次并保留数据（零件型号、测量员、测量数据）。</li><li>打开 Minitab，将带有表头的名称（零件型号、测量员、测量数据）复制填入到 Minitab 的表格中（使用鼠标点击第一行的单元格，即灰色区域的那一行，鼠标右键粘贴单元格）。</li><li>点击「统计」→「质量工具」→「量具研究」→「量具 R&amp;R 研究（交叉）」→ 选择「部件号」「操作员」「测量数据」→ 确认分析方法为「方差分析」→ 点击「选项」→ 输入规格下限和上限 → 点击「量具信息」→ 填写信息（量具公差 = 规格上限 - 规格下限）→ 点击「确定」。</li></ol>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 十二 -->
+        <div class="section" id="sec-12">
+            <h2><span class="sec-num">十二</span> 全尺寸报告</h2>
+            <ul><li>全尺寸报告里的气泡序号必须对应图纸上的气泡序号，即圆圈数字标注的关键尺寸和性能要求等，性能要求需填写该测试报告存放的对应文件夹及报告名称。</li></ul>
+            <h3>填写规范：</h3><ol><li><strong>气泡序号：</strong>与图纸上的气泡号一致，包括尺寸、性能要求等</li><li><strong>项目：</strong>填写需要测量的项目名称</li><li><strong>尺寸/特性：</strong>填写图纸要求的尺寸或特性，性能要求需填写该测试报告存放的对应文件夹及报告名称</li><li><strong>测量结果：</strong>填写使用测量仪器测量出来的尺寸结果</li></ol>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 十三 -->
+        <div class="section" id="sec-13">
+            <h2><span class="sec-num">十三</span> 初始过程能力研究</h2>
+            <ul><li>初始过程能力研究目的是了解过程变差、分析并预测过程在规范内运行的能力，而非单纯追求一个指数值。</li><li>应测量 100 pcs 的样品数据，并将其分为 5 pcs 为一小组来进行分析比较。一般使用 Minitab 来分析初始过程能力是否达标。</li></ul>
+            <h3>填写规范：</h3><ol><li><strong>特性描述：</strong>填写需要研究的项目名称</li><li><strong>特殊分类：</strong>填写特性符号，"SC" 或 "CC"</li><li><strong>量具名称：</strong>填写参与研究的量具名称</li><li><strong>测量范围：</strong>填写量具的量程</li><li><strong>精度：</strong>填写量具的精密程度</li><li><strong>控制方法：</strong>使用最多的是 P 图和 Xbar-R 图。检验一般使用 P 图，其余一般使用 Xbar-R 图</li><li><strong>完成时间：</strong>填写过程能力分析完成的时间</li><li><strong>报告编号：</strong>填写报告的编号。示例：SY-CP-001</li><li><strong>报告附件：</strong>初始过程能力研究的报告</li></ol>
+            <h3>1. Xbar-R 图制作步骤：</h3>
+            <div class="image-placeholder">
+                <span class="icon">📊</span>
+                <div class="desc">Xbar-R 控制图示例（Minitab 输出）</div>
+                <div class="note">（原文档图：media/image8.png）</div>
+            </div>
+            <p>将测试数据输入 Minitab 表格，点击「统计」→「控制图」→「子组的变量控制图」→「Xbar-R」→ 选择数据列 → 填写「子组大小」（一般为 5）→ 点击「确定」。图里未出现标红文字则表示 Xbar-R 图合格。</p>
+            <h3>2. P 图制作步骤：</h3>
+            <div class="image-placeholder">
+                <span class="icon">📊</span>
+                <div class="desc">P 控制图示例（Minitab 输出）</div>
+                <div class="note">（原文档图：media/image9.png）</div>
+            </div>
+            <p>将测试数据输入 Minitab 表格，点击「统计」→「控制图」→「属性控制图」→「P」→ 选择数据列 → 填写「子组大小」（一般为 5）→ 点击「P 控制图选项」→「检验」→ 勾选「连续 K 点在中心线同侧」→ 点击「确定」。图里未出现标红文字则表示 P 图合格。</p>
+            <h3>3. 过程能力报告制作步骤（CPK）：</h3>
+            <div class="image-placeholder">
+                <span class="icon">📊</span>
+                <div class="desc">过程能力分析（正态）对话框示例（Minitab）</div>
+                <div class="note">（原文档图：media/image10.png）</div>
+            </div>
+            <p>将测试数据输入 Minitab 表格，点击「统计」→「质量工具」→「能力分析」→「正态」→ 选择数据列 → 填写「子组大小」（一般为 5）→ 填写「规格下限」及「规格上限」→ 点击「确定」。若 CPK ≥ 1.33，视为合格。</p>
+            <h3>4. 表格填写补充：</h3><ul><li><strong>零件名称、产品图号、特性分类及特性描述</strong> 要与主表格一致。</li><li><strong>样本数量：</strong>填写参与研究所需的样品数量。</li><li><strong>子组数量：</strong>子组数量 = 样本数量 ÷ 子组大小。示例：样本数量 100，子组大小 5，则子组数量为 20。</li><li>DATA 工作表下可以使用 <code>WRAPROWS</code> 函数将一列样本数据平均分成 N 列。示例：将 100 个数据分成 5 列，<code>WRAPROWS(A1:A100,5)</code> 即为所需的函数。数据被分为 5 列 20 行。</li></ul>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 十四 -->
+        <div class="section" id="sec-14">
+            <h2><span class="sec-num">十四</span> 实验室资格证书</h2>
+            <ul><li>实验室资格证书为通过 CNAS/CMA 认可的 ISO/IEC 17025 认可证书（复印件）和认可范围附件。</li><li>目前本司没有实验室资格证书，可以先不提交。</li><li>若客户执意要，可以提交一份 <strong>《内部实验室符合性声明》</strong>。根据 PPAP 标准，内部实验室虽然没有第三方证书，但应满足特定要求（如设备按期校准、人员经过培训、有标准作业指导书等）。</li></ul>
+            <div class="note"><strong>具体操作：</strong><br>1. 准备一份文件，内容包括：实验室设备清单及其有效的校准证书、测试人员的培训记录、所依据的测试标准（如 GB、ISO）清单。<br>2. 在文件最后，附上一份由质量经理或负责人签字的声明，格式参考：<br><em>"本司内部实验室虽未经第三方 ISO/IEC 17025 认可，但其设备、人员、方法及环境完全满足针对 [产品名称] 项目所执行的 [列出测试项目] 的要求，并能提供准确可靠的检测结果。"</em><br>3. 在 PPAP 清单中，项目名称写"实验室资格文件"，提交状态写"提交"，实际就塞入这份声明及佐证材料。<br>4. 给客户的印象是：虽然没证，但所有检测要素受控，且你敢于正面声明和负责。</div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 十五 -->
+        <div class="section" id="sec-15">
+            <h2><span class="sec-num">十五</span> 供应商测试报告</h2>
+            <ul><li>提交测试报告本身且名称编号要对"全尺寸报告"一致。即"全尺寸报告"上面填写的"详情见 13. 供应商报告里 13.4 触发复位压力测试"，则对应的测试报告的文件名称为"13.4 触发复位压力测试"。</li></ul>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 十六 -->
+        <div class="section" id="sec-16">
+            <h2><span class="sec-num">十六</span> 样品</h2>
+            <ul><li>本身不需要报告。确保样品提供给客户以及 PSW 上的零件重量填写正确。与之相关联的 PSW、设计记录、DFMEA 和 PFMEA、控制计划、全尺寸报告、供应商测试报告、测量系统研究（MSA）、初始过程研究并保留 1-3 pcs 与提交样品一致的标准限样必须要有。</li></ul>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 十七 -->
+        <div class="section" id="sec-17">
+            <h2><span class="sec-num">十七</span> 标准限样</h2>
+            <ul><li>本身不需要报告。确保留有 1-3 pcs 的标准限样，保存时间截止为 1 年或下一版本新品出现。</li></ul>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 十八 -->
+        <div class="section" id="sec-18">
+            <h2><span class="sec-num">十八</span> 材质证明</h2>
+            <ul><li>需向原材料供应商索要对应批次的材质证明，里面会有炉号、化学成分、拉伸性能、硬度等数据。</li><li>核对材质证明上的标准等是否与图纸要求一致。</li><li>如果零件使用多种材料（如不同双面胶、连接器），每一种都要有独立的材质证书。</li></ul>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 十九 -->
+        <div class="section" id="sec-19">
+            <h2><span class="sec-num">十九</span> 按节拍生产报告</h2>
+            <ol><li><strong>零件号：</strong>填写客户提供的零件号。示例：320939</li><li><strong>零件名称：</strong>填写零件名称。示例：SBR 传感器</li><li><strong>供应商名称：</strong>填写本司全称。示例：广东方舟智造科技有限公司</li><li><strong>图纸版本：</strong>填写图纸的版本。示例：A0</li><li><strong>生产条件确认清单：</strong>根据实际情况确认生产现场实际状态，已确认则勾选"已确认"</li><li><strong>工序名称：</strong>填写生产工序的名称。示例：注塑</li><li><strong>理论节拍（秒）：</strong>填写理想状态下 1 pcs 零件完成该工序的工作时长。示例：50</li><li><strong>实测 1（秒）：</strong>填写实际生产中 1 pcs 零件完成该工序的工作时长</li><li><strong>平均实测节拍（秒）：</strong>实测 1、实测 2、实测 3 的平均值（公式计算）</li><li><strong>判定：</strong>判定实测节拍是否小于理论节拍，是则 "OK"，否则 "NG"（公式计算）</li><li><strong>瓶颈工位：</strong>填写平均节拍最大的工序的信息（复制该信息粘贴到此处）</li><li><strong>实际瓶颈节拍：</strong>填写瓶颈工序的平均实际节拍</li><li><strong>每小时理论产出：</strong>= 3600 秒 ÷ 实际瓶颈节拍（公式计算）</li><li><strong>每班计划工作时间：</strong>填写每一班次计划的工作时长，一般为 8 小时</li><li><strong>每班理论产出：</strong>= 每小时理论产出 × 每日计划工作时间（公式计算）</li><li><strong>设备利用率（OEE）：</strong>OEE = 时间开动率 × 性能开动率 × 合格品率。<br>世界级水平：OEE ≥ 85%；优秀：75% - 85%；一般/可接受：60% - 75%；预警/不可接受：&lt; 60%。<br>示例：时间开动率 90% × 性能效率 95% × 合格率 98% = OEE 预估为 83.8%。</li><li><strong>每班有效产能：</strong>= 每班理论产出 × 设备利用率（公式计算）</li><li><strong>每日班次数：</strong>填写一天内安排生产的班次</li><li><strong>每月工作日：</strong>填写每月工作多少天</li><li><strong>月产能：</strong>= 每班有效产能 × 每日班次数 × 每月工作日（公式计算）</li><li><strong>客户需求峰值：</strong>来自客户采购预测或合同</li><li><strong>年化有效产能：</strong>= 月产能 × 12（公式计算）</li><li><strong>产能满足率：</strong>= 年化有效产能 / 客户年需求峰值（公式计算）</li></ol>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 二十 -->
+        <div class="section" id="sec-20">
+            <h2><span class="sec-num">二十</span> 包装流程</h2>
+            <ol><li><strong>供应商名称：</strong>填写本司全称</li><li><strong>客户名称：</strong>填写客户全称</li><li><strong>交货地点：</strong>填写客户的快递地址</li><li><strong>制作：</strong>填写文件制作人的姓名</li><li><strong>审核：</strong>填写文件审核人的姓名。一般填写"郭定军"</li><li><strong>批准：</strong>填写文件批准人的姓名。一般填写"郭文飞"</li><li><strong>日期：</strong>填写内部审核通过的日期</li><li><strong>零件描述：</strong>可以将图纸里零件的 2D 图填写进去</li><li><strong>零件名称：</strong>填写零件的名称</li><li><strong>零件号（客户）：</strong>填写客户提供的零件号</li><li><strong>零件号（供应商）：</strong>填写内部使用的零件号</li><li><strong>零件尺寸：</strong>查看图纸，填写零件的长、宽、高</li><li><strong>单个零件重量（KG）：</strong>使用电子秤称量零件总量后填写</li><li><strong>零件材质：</strong>填写组成零件的所有原料</li><li><strong>交货频次：</strong>由于是首次提交，一般填写 "/"</li><li><strong>包装示意图：</strong>填入零件整体、装入包装袋内、装入包装箱内的图片</li><li><strong>包装描述：</strong>填写零件装入包装箱的步骤。示例：产品用 PE 膜装袋好，一个袋子可装入 50 pcs 的产品，最后将包装好的产品放进包装箱内</li><li><strong>是否回收：</strong>是否是可回收的环保材料，一般填写"是"</li><li><strong>总重量（包材+产品）Kg：</strong>一般填写 "/"</li><li><strong>包材名称：</strong>分别在三个相同名称的表格填写零件本身、包装袋、纸箱的名称。示例："产品材料"、"PE 膜"、"纸箱"</li><li><strong>包材尺寸：</strong>分别在三个相同名称的表格填写零件本身、包装袋、纸箱的尺寸</li><li><strong>使用数量：</strong>分别在三个相同名称的表格填写零件本身、包装袋、纸箱所使用的数量</li><li><strong>重量（Kg）：</strong>分别在三个相同名称的表格填写零件本身、包装袋、纸箱的重量</li><li><strong>版本：</strong>填写文件的版本</li><li><strong>新制：</strong>确认文件是否为首次制作，是就填写"是"，不是就填写为"否"</li><li><strong>日期：</strong>填写文件制作完成的日期</li><li><strong>变更：</strong>填写文件变更的内容</li><li><strong>日期：</strong>填写文件内容变更的日期</li></ol>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 二十一 -->
+        <div class="section" id="sec-21">
+            <h2><span class="sec-num">二十一</span> 早期遏制行动计划</h2>
+            <ul><li>早期遏制行动为在产品开始正式量产的初期，为了在问题"逃逸"到客户那里之前就把它们拦截下来，而临时增加的一道额外、加严的检验和围堵防线。</li><li><strong>执行步骤：</strong>策划与准备早期遏制行动计划（量产前完成）→ 实施遏制（从量产首件开始，严加管控）→ 快速响应及纠错（发现问题，分析原因并纠正，验证是否恢复合格）→ 退出早期遏制（至少连续 30 个生产日发至客户端的成品零缺陷，产线也未发现同样原因反复出现的问题）→ 回归常态化控制与总结。</li><li>在方案执行期间，需要有以下的每日归档记录以应对客户稽查：<ul><li>《GP-12 每日全检记录表》（含操作员与检验员双签）</li><li>《不良品柏拉图（每日动态更新）》</li><li>《遏制期内量具校准/GR&amp;R 合格证明》</li><li>《QRQC 快速响应会议签到及会议纪要》</li><li>《GP-12 过程分层审核（LPA）评分表》</li></ul></li></ul>
+            <h3>GP-12 退出确认报告填写规范：</h3>
+            <div class="note"><strong>供应商 GP-12 退出说明（标准模板示例，可直接套用）：</strong><br><br><strong>验证周期：</strong>本批产品自 [起始日期] 至 [结束日期]，共计生产 [X] 件，产出 [X] 件合格品。<br><strong>PPAP 状态：</strong>我司已于 [日期] 顺利通过客户 PPAP 批准（工装/检具已验收），且客户工程变更已落地生效。<br><strong>生产过程能力：</strong>关键尺寸 Cpk 检测结果均 ≥ 1.33，过程表现稳定。新工装/检具 MSA (GR&amp;R) 分析合格（如适用）。<br><strong>遏制结果：</strong>在 GP-12 过渡期间，无客户产线停线、无投诉，内部一次合格率达到 [X]%。<br><strong>结论：</strong>各项数据满足退出条件，申请正式退出 GP-12 遏制状态。</div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 二十二 -->
+        <div class="section" id="sec-22">
+            <h2><span class="sec-num">二十二</span> IMDS 信息提交</h2>
+            <ul><li>目前尚未有客户强制要求提交 IMDS 信息，也未曾提交过，因此没有现成的操作流程。以下是对它的一点见解。</li><li><strong>提交流程：</strong>注册 IMDS 账户 → 在 IMDS 系统里建好数据 → 发给客户 → 客户接受 → 把 IMDS ID 填进 PPAP。</li><li>需要登录 <a href="http://www.mdsystem.com" target="_blank">www.mdsystem.com</a> 网站并注册一个"公司账户"，然后填写带红色 "*" 的必填项。这些信息的填写需要公司人员协助完成。</li></ul>
+            <div class="image-placeholder">
+                <span class="icon">🖥️</span>
+                <div class="desc">IMDS 系统注册/登录界面示意图</div>
+                <div class="note">（原文档图：media/image11.png）</div>
+            </div>
+            <h3>登录系统后，按以下步骤创建 MDS：</h3>
+            <h4>步骤 1：新建 MDS</h4><ul><li>点击菜单「创建」→「材料数据表（MDS）」</li><li>类型选择「部件」（Component）</li></ul>
+            <h4>步骤 2：填写部件基本信息</h4><ul><li><strong>零件号：</strong>严格按图纸填写，区分大小写、符号。错一个字符，客户系统会报"零件号与收货单不符"导致退回。</li><li><strong>描述：</strong>图纸上的零件名称。</li><li><strong>重量：</strong>单位是克，输入零件净重。</li><li>其他信息按提示填入供应商信息、开发日期等，可留默认或按客户要求填。</li></ul>
+            <h4>步骤 3：添加材料（最关键步骤）</h4><p>把零件上的所有材料都列出来。有两种方式：</p><p><strong>方式 A：引用供应商的 MDS（极力推荐）</strong></p><ul><li>点击「引用 MDS」</li><li>在弹出框里输入供应商给你的 MDS ID 和版本号，搜索。</li><li>系统会把该材料的完整成分数据自动加载到你零件下面。</li><li>依次把所有外包材料都引用进来（如塑料粒子、钢材、镀层、橡胶、胶水等）。</li><li>如果零件由多个半成品组成（比如注塑件 + 嵌件），要把每个半成品的 MDS 都引用进去。</li></ul><p><strong>方式 B：自己搭建材料（如供应商没 IMDS 数据时）</strong></p><ul><li>点击「新建材料」。</li><li>按材料类别选大类（如"5.1 热塑性塑料"、"1.1 钢"）。</li><li>再添加基础物质（Basic Substance），输入每个成分的 CAS 号、名称、重量百分比。</li><li>所有成分加起来必须为 100%，且通配符物质（如"7.3 不公开物质"）有使用限制。</li><li>非常容易报错，因为必须符合 IMDS 基础物质列表和规则。不建议新手自建，最好让供应商提供合规成分你再录入，或要求供应商尽快注册 IMDS 并创建 MDS。</li></ul>
+            <h4>步骤 4：检查数据</h4><ul><li>在 MDS 界面，点击「分析」或「检查」。</li><li>系统会自动扫描禁用物质、法规合规性、物质申报冲突等。</li><li>常见报错：物质超出 GADSL 限值、使用了"保密物质"但未勾选相应通配符、重量百分比加起来不是 100%。</li><li>必须先解决所有错误（Error），直到分析结果为"无错误"。警告（Warning）一般可提交，但建议都处理。</li></ul>
+            <h4>步骤 5：发布（Release）并发送给客户</h4><ul><li>检查无误后，点击「发布」（Release）。系统会生成一个 MDS ID（如 12345678）和版本（如 /1）。</li><li>然后点击「发送」（Send），在地址栏里填入客户的 IMDS 公司 ID。</li><li>勾选发送选项，一般选择"正式提交"。系统会要求你确认，然后数据就传输到客户那边去了。</li></ul>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 二十三 -->
+        <div class="section" id="sec-23">
+            <h2><span class="sec-num">二十三</span> 分供方清单</h2>
+            <ul><li>提供 BOM 格式的材料清单给客户。一般需要向采购询问材料的物料编码、规格型号和分供方名称。以上都需要建了 BOM 系统后才能获取到，样品一般是不建 BOM 系统的，因此获取不到以上信息。</li></ul>
+        </div>
+
+        <!-- 底部 -->
+        <div class="divider"></div>
+        <div style="text-align: center; color: #94a3b8; font-size: 13px; padding: 10px 0 4px 0;">
+            — PPAP 填写规范 · 依据 CVG 查核清单 &amp; AIAG 《PPAP手册》第四版 · V1.0 —
+        </div>
+
+    </div>
+    <!-- container end -->
+
+    <!-- ====== JavaScript 交互 ====== -->
+    <script>
+        (function() {
+            const sidebar = document.getElementById('sidebarNav');
+            const overlay = document.getElementById('sidebarOverlay');
+            const toggleBtn = document.getElementById('menuToggle');
+            const links = document.querySelectorAll('.sidebar-nav a');
+            const sections = document.querySelectorAll('.section, #sec-pref');
+
+            function toggleSidebar(open) {
+                const isOpen = sidebar.classList.contains('open');
+                if (open === undefined) {
+                    sidebar.classList.toggle('open');
+                    overlay.classList.toggle('active');
+                } else if (open) {
+                    sidebar.classList.add('open');
+                    overlay.classList.add('active');
+                } else {
+                    sidebar.classList.remove('open');
+                    overlay.classList.remove('active');
+                }
+            }
+
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    toggleSidebar();
+                });
+            }
+
+            if (overlay) {
+                overlay.addEventListener('click', function() {
+                    toggleSidebar(false);
+                });
+            }
+
+            links.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 820) {
+                        toggleSidebar(false);
+                    }
+                });
+            });
+
+            function updateActiveLink() {
+                let currentId = '';
+                const scrollY = window.scrollY + 120;
+                sections.forEach(section => {
+                    const top = section.offsetTop;
+                    const height = section.offsetHeight;
+                    if (scrollY >= top && scrollY < top + height) {
+                        currentId = section.getAttribute('id');
+                    }
+                });
+                if ((window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight - 10) {
+                    const lastSection = sections[sections.length - 1];
+                    if (lastSection) {
+                        currentId = lastSection.getAttribute('id');
+                    }
+                }
+                links.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + currentId) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', updateActiveLink);
+            window.addEventListener('resize', updateActiveLink);
+            setTimeout(updateActiveLink, 100);
+
+            document.querySelectorAll('.sidebar-nav a, .toc-grid a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        const target = document.querySelector(href);
+                        if (target) {
+                            e.preventDefault();
+                            const offsetTop = target.getBoundingClientRect().top + window.scrollY - 70;
+                            window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                            history.pushState(null, null, href);
+                        }
+                    }
+                });
+            });
+
+        })();
+    </script>
+
+</body>
+</html>
