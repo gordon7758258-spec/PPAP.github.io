@@ -661,10 +661,9 @@
         <!-- 一、PSW -->
         <div class="section" id="sec-1">
             <h2><span class="sec-num">一</span> PSW</h2>
-            <div class="image-placeholder">
-                <span class="icon">🖼️</span>
-                <div class="desc">PSW 零件提交保证书 填写表格示意图</div>
-                <div class="note">（原文档图：media/image1.jpeg）</div>
+            <div style="margin: 20px 0; text-align: center;">
+                <img src="images/PSW.jpg" alt="PSW 零件提交保证书填写表格" style="max-width: 100%; border: 1px solid #dce4ec; border-radius: 8px;">
+                <p style="color: #64748b; font-size: 13px; margin-top: 6px;">PSW 零件提交保证书 填写表格示意图</p>
             </div>
             <ol class="item-list">
                 <li data-num="1"><span class="label">零件名称：</span>填写零件的名称。示例：SBR 传感器</li>
@@ -874,17 +873,15 @@
             <h3>主表格填写规范：</h3><ol><li><strong>零件/工序号：</strong>填写零件或工序的名称。示例：水胶工序</li><li><strong>测量内容：</strong>填写测量零件的内容。示例：开关导通电阻</li><li><strong>测量要求：</strong>填写测量内容的规范要求。示例：≤150Ω</li><li><strong>量具名称：</strong>填写测量量具所使用的设备名称。示例：二次元影像仪</li><li><strong>测量范围：</strong>填写量具的量程大小。示例：0~200Ω</li><li><strong>分辨率：</strong>填写量具的精度大小。示例：0.001mm</li><li><strong>测量器具编号：</strong>填写量具的编号。示例：EQ-001</li><li><strong>分析项目：</strong>填写分析测量出来的数据的项目类别。示例：GR&amp;R 分析</li><li><strong>完成时间：</strong>填写完成分析数据的时间。示例：2026.6.1</li><li><strong>分析人：</strong>填写分析人员姓名。示例：王小二</li><li><strong>分析结果：</strong>"OK" 或 "NG"</li><li><strong>报告附件：</strong>一般不填</li></ol>
             <h3>重复性再现性研究（交叉型）表格填写规范：</h3><ol><li><strong>零件名称：</strong>填写产品的零件名称</li><li><strong>零件号：</strong>填写产品的零件号</li><li><strong>特性名称：</strong>填写测量的项目</li><li><strong>分析日期：</strong>填写分析数据的日期</li><li><strong>特性值：</strong>填写测量项目的标准值</li><li><strong>上限：</strong>填写标准值 + 上公差的值</li><li><strong>下限：</strong>填写标准值 - 下公差的值</li><li><strong>分析：</strong>填写分析数据的人员姓名</li><li><strong>量具名称：</strong>填写测量产品的量具名称</li><li><strong>量具编号：</strong>填写测量产品的量具编号</li><li><strong>量具精度：</strong>填写量具的精密程度</li><li><strong>批准：</strong>填写批准数据分析报告的人员姓名</li><li><strong>零件：</strong>每个操作员测量对同一件产品进行 3 次，共需测量 10 pcs 的产品</li><li><strong>平均值：</strong>对同一件产品测量 3 次的平均值（公式计算）</li><li><strong>极差：</strong>3 次测量出来的最大值减去最小值（公式计算）</li><li><strong>结果平均值：</strong>对应行 10 pcs 产品测量值的平均值（公式计算）</li><li><strong>零件（Xp）：</strong>零件测量值的期望值，3 名操作员对同一件产品测量的平均值的和除以 3</li><li><strong>图表报告：</strong>使用 Minitab 分析 3 名操作员测量产品出来的数据所得。量具 R&amp;R 报告里的 "% 研究变异（%SV）" 列对应的 "合计量具 R&amp;R" 行的值即为 "%R&amp;R" 的值；"可区分的类别数" 即为 "NDC"。%G&amp;G &lt; 10%，NDC &gt; 5 是测量系统可接受的</li><li><strong>分析者判定及分析结论：</strong>根据分析出来的图表报告以及评判标准，填写分析判定和结论</li></ol>
             <h3>Minitab 进行 GR&amp;R（交叉）分析操作步骤：</h3>
-            <div class="image-placeholder">
-                <span class="icon">📈</span>
-                <div class="desc">Minitab 数据格式示例（操作员A测量数据）</div>
-                <div class="note">（原文档图：media/image6.png）</div>
-            </div>
-            <div class="image-placeholder">
-                <span class="icon">📈</span>
-                <div class="desc">Minitab 量具 R&amp;R 研究（交叉）设置界面</div>
-                <div class="note">（原文档图：media/image7.png）</div>
+            <div style="margin: 20px 0; text-align: center;">
+                <img src="images/measureMan.png" alt="Minitab 数据格式示例（操作员A测量数据）" style="max-width: 100%; border: 1px solid #dce4ec; border-radius: 8px;">
+                <p style="color: #64748b; font-size: 13px; margin-top: 6px;">Minitab 数据格式示例（操作员A测量数据）</p>
             </div>
             <ol><li>选择 10 件同一型号的零件，分别让 3 名操作员测量同一件零件 3 次并保留数据（零件型号、测量员、测量数据）。</li><li>打开 Minitab，将带有表头的名称（零件型号、测量员、测量数据）复制填入到 Minitab 的表格中（使用鼠标点击第一行的单元格，即灰色区域的那一行，鼠标右键粘贴单元格）。</li><li>点击「统计」→「质量工具」→「量具研究」→「量具 R&amp;R 研究（交叉）」→ 选择「部件号」「操作员」「测量数据」→ 确认分析方法为「方差分析」→ 点击「选项」→ 输入规格下限和上限 → 点击「量具信息」→ 填写信息（量具公差 = 规格上限 - 规格下限）→ 点击「确定」。</li></ol>
+            <div style="margin: 20px 0; text-align: center;">
+                <img src="images/GRR.jpg" alt="Minitab 量具 R&amp;R 研究（交叉）设置界面" style="max-width: 100%; border: 1px solid #dce4ec; border-radius: 8px;">
+                <p style="color: #64748b; font-size: 13px; margin-top: 6px;">PSW 零件提交保证书 填写表格示意图</p>
+            </div>
         </div>
 
         <!-- ============================================================ -->
