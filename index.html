@@ -140,24 +140,6 @@
             letter-spacing: 1px;
         }
 
-        .page-header .header-meta {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            margin-top: 10px;
-            font-size: 15px;
-            color: #475569;
-        }
-
-        .page-header .header-meta .divider {
-            color: #cbd5e1;
-        }
-
-        .page-header .header-meta .author {
-            font-weight: 500;
-            color: #1e293b;
-        }
 
         .page-header .version-tag {
             display: inline-block;
@@ -959,10 +941,10 @@
                 <img src="images/measureMan.png" alt="Minitab 数据格式示例（操作员A测量数据）" style="max-width: 100%; border: 1px solid #dce4ec; border-radius: 8px;">
                 <p style="color: #64748b; font-size: 13px; margin-top: 6px;">Minitab 数据格式示例（操作员A测量数据）</p>
             </div>
-            <ol>
-                <li>选择 10 件同一型号的零件，分别让 3 名操作员测量同一件零件 3 次并保留数据（零件型号、测量员、测量数据）。</li>
-                <li>打开 Minitab，将带有表头的名称（零件型号、测量员、测量数据）复制填入到 Minitab 的表格中（使用鼠标点击第一行的单元格，即灰色区域的那一行，鼠标右键粘贴单元格）。</li>
-                <li>点击「统计」→「质量工具」→「量具研究」→「量具 R&amp;R 研究（交叉）」→ 选择「部件号」「操作员」「测量数据」→ 确认分析方法为「方差分析」→ 点击「选项」→ 输入规格下限和上限 → 点击「量具信息」→ 填写信息（量具公差 = 规格上限 - 规格下限）→ 点击「确定」。</li>
+            <ol class="item-list">
+                <li data-num="1">选择 10 件同一型号的零件，分别让 3 名操作员测量同一件零件 3 次并保留数据（零件型号、测量员、测量数据）。</li>
+                <li data-num="2">打开 Minitab，将带有表头的名称（零件型号、测量员、测量数据）复制填入到 Minitab 的表格中（使用鼠标点击第一行的单元格，即灰色区域的那一行，鼠标右键粘贴单元格）。</li>
+                <li data-num="3">点击「统计」→「质量工具」→「量具研究」→「量具 R&amp;R 研究（交叉）」→ 选择「部件号」「操作员」「测量数据」→ 确认分析方法为「方差分析」→ 点击「选项」→ 输入规格下限和上限 → 点击「量具信息」→ 填写信息（量具公差 = 规格上限 - 规格下限）→ 点击「确定」。</li>
             </ol>
             <div style="margin: 20px 0; text-align: center;">
                 <img src="images/GRR.png" alt="Minitab 量具 R&amp;R 研究（交叉）设置界面" style="max-width: 100%; border: 1px solid #dce4ec; border-radius: 8px;">
@@ -976,11 +958,11 @@
             <h2><span class="sec-num">十二</span> 全尺寸报告</h2>
             <ul><li>全尺寸报告里的气泡序号必须对应图纸上的气泡序号，即圆圈数字标注的关键尺寸和性能要求等，性能要求需填写该测试报告存放的对应文件夹及报告名称。</li></ul>
             <h3>填写规范：</h3>
-            <ol>
-                <li><strong>气泡序号：</strong>与图纸上的气泡号一致，包括尺寸、性能要求等</li>
-                <li><strong>项目：</strong>填写需要测量的项目名称</li>
-                <li><strong>尺寸/特性：</strong>填写图纸要求的尺寸或特性，性能要求需填写该测试报告存放的对应文件夹及报告名称</li>
-                <li><strong>测量结果：</strong>填写使用测量仪器测量出来的尺寸结果</li>
+            <ol class="item-list">
+                <li data-num="1"><span class="label">气泡序号：</span>与图纸上的气泡号一致，包括尺寸、性能要求等</li>
+                <li data-num="2"><span class="label">项目：</span>填写需要测量的项目名称</li>
+                <li data-num="3"><span class="label">尺寸/特性：</span>填写图纸要求的尺寸或特性，性能要求需填写该测试报告存放的对应文件夹及报告名称</li>
+                <li data-num="4"><span class="label">测量结果：</span>填写使用测量仪器测量出来的尺寸结果</li>
             </ol>
         </div>
 
